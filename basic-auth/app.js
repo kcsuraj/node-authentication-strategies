@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const basicAuth = require("./middleware/basicAuth");
 
 dotenv.config({ path: ".env" });
 
@@ -8,6 +9,8 @@ console.log(process.env.dbURI);
 
 // Create Express server
 const app = express();
+
+app.use(basicAuth);
 
 // Connect to MongoDB database
 mongoose
