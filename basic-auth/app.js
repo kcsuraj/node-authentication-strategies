@@ -10,7 +10,7 @@ console.log(process.env.dbURI);
 // Create Express server
 const app = express();
 
-app.use(basicAuth);
+app.get("/users", basicAuth);
 
 // Connect to MongoDB database
 mongoose

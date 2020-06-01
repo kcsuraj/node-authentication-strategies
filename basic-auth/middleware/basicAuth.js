@@ -11,13 +11,11 @@ function basicAuth(req, res, next) {
   const credentials = Buffer.from(base64String, "base64").toString("ascii");
 
   const [username, password] = credentials.split(":");
-  console.log(credentials, "===", base64String);
 
   if (username === "test" && password === "12345") {
-    console.log("authenticated");
+    return res.status(400).json({});
   }
-
-  next();
+  res.status(200).json({ error: "error occured" });
 }
 
 module.exports = basicAuth;
