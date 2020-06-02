@@ -5,12 +5,12 @@ const basicAuth = require("./middleware/basicAuth");
 
 dotenv.config({ path: ".env" });
 
-console.log(process.env.dbURI);
-
 // Create Express server
 const app = express();
 
-app.get("/users", basicAuth);
+app.get("/users", basicAuth, (req, res, next) => {
+  return res.status(200).json({ message: "authentication successful" });
+});
 
 // Connect to MongoDB database
 mongoose
@@ -19,9 +19,7 @@ mongoose
     useUnifiedTopology: true,
     useCreateIndex: true,
   })
-  .then(() => {
-    console.log("Connected to database");
-  })
+  .then(() => {})
   .catch((err) => {
     console.log(
       "MongoDB connection error. Please make sure MongoDB is running. " + err
